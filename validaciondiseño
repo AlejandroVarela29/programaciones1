@@ -1,0 +1,1 @@
+ nota1 = int.Parse(maskedTextBox1.Text = (0).ToString());
