@@ -1,0 +1,84 @@
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+
+namespace Ejemplos
+{
+    public partial class Pagos : Form
+    {
+        public Pagos()
+        {
+            InitializeComponent();
+        }
+
+        private void Pagos_Load(object sender, EventArgs e)
+        {
+            txtSubtotal.Enabled = false;
+            txtTotal.Enabled = false;
+            txtDescuento.Enabled = false;
+        }
+
+        private void radioButton1_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            double ingreso, total, subtotal, descuento,impuesto;
+            if (String.IsNullOrEmpty(txtPagar.Text) || double.Parse(txtPagar.Text) <= 0)
+            {
+                
+                MessageBox.Show("No puede ser nulo", "Advertencia");
+            }
+            else
+            {
+                ingreso = Double.Parse(txtPagar.Text);
+                if (radioEfectivo.Checked)
+                {
+                    descuento = ingreso * 0.05;
+                    impuesto = ingreso * 0.15;
+                    subtotal = impuesto-descuento;
+                    txtSubtotal.Text = subtotal.ToString();
+
+                    total = (ingreso-descuento)+impuesto;
+                    txtTotal.Text = total.ToString();
+
+                    txtDescuento.Text = descuento.ToString();
+
+                    
+                }
+                else
+                {   
+                    subtotal = ingreso * 0.15;
+                    txtSubtotal.Text = subtotal.ToString();
+
+                    total= (ingreso-subtotal);
+                    txtTotal.Text = total.ToString();
+                }
+            }
+        }
+
+        private void txtPagar_TextChanged(object sender, EventArgs e)
+        {
+          
+
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+        }
+    }
+}
